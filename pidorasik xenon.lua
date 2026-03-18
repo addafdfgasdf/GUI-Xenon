@@ -3895,7 +3895,7 @@ function NeverLose:CreateWindow(Config)
 	WindowFrame.Name = NeverLose.RandomString();
     WindowFrame.Parent = NeverLose.ScreenGui;
     WindowFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    WindowFrame.BackgroundColor3 = Color3.fromRGB(15, 60, 180) -- Чисто синий цвет (можешь менять цифры под себя)
+    WindowFrame.BackgroundColor3 = Color3.fromRGB(10, 15, 40) -- Глубокий темный синий цвет
     WindowFrame.BackgroundTransparency = 0.055
     WindowFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
     WindowFrame.BorderSizePixel = 0
