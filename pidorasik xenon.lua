@@ -3890,7 +3890,7 @@ function NeverLose:CreateWindow(Config)
 	WindowFrame.Name = NeverLose.RandomString();
     WindowFrame.Parent = NeverLose.ScreenGui;
     WindowFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    WindowFrame.BackgroundColor3 = Color3.fromRGB(8, 8, 13)
+    WindowFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Белый цвет обязателен для работы градиента
     WindowFrame.BackgroundTransparency = 0.055
     WindowFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
     WindowFrame.BorderSizePixel = 0
@@ -3903,24 +3903,25 @@ function NeverLose:CreateWindow(Config)
         WindowFrame.BackgroundTransparency = 0.0255
     end;
 
+    -- Создаем градиент для эффекта воды
+    local waterGradient = Instance.new("UIGradient")
+    waterGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(15, 60, 130)),   -- Глубокий синий
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(50, 140, 190)),  -- Мягкий океанский голубой
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 80, 150))    -- Морской синий
+    })
+    waterGradient.Parent = WindowFrame
+
+    -- Анимация перетекания
     task.spawn(function()
-        local tInfo = TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
-
-        local cDarkBlue = Color3.fromRGB(20, 45, 120)
-        local cLightBlue = Color3.fromRGB(120, 190, 255)
-        local cWhite = Color3.fromRGB(245, 250, 255)
-
-        WindowFrame.BackgroundColor3 = cDarkBlue
-
+        local tInfo = TweenInfo.new(8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
+        
         while true do
-            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cLightBlue}):Play()
-            task.wait(5)
-            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cWhite}):Play()
-            task.wait(5)
-            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cLightBlue}):Play()
-            task.wait(5)
-            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cDarkBlue}):Play()
-            task.wait(5)
+            -- Градиент плавно смещается и вращается, создавая эффект течения
+            TweenService:Create(waterGradient, tInfo, {Offset = Vector2.new(0.3, 0.3), Rotation = 30}):Play()
+            task.wait(8)
+            TweenService:Create(waterGradient, tInfo, {Offset = Vector2.new(-0.3, -0.3), Rotation = -30}):Play()
+            task.wait(8)
         end
     end)
 
