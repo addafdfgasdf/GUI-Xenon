@@ -3888,47 +3888,67 @@ function NeverLose:CreateWindow(Config)
 	local TabContainer = Instance.new("Frame")
 
 	WindowFrame.Name = NeverLose.RandomString();
-	WindowFrame.Parent = NeverLose.ScreenGui;
-	WindowFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	WindowFrame.BackgroundColor3 = Color3.fromRGB(8, 8, 13)
-	WindowFrame.BackgroundTransparency = 0.055
-	WindowFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	WindowFrame.BorderSizePixel = 0
-	WindowFrame.ClipsDescendants = true
-	WindowFrame.Position = UDim2.new(255, 0, 255, 0)
-	WindowFrame.Size = Window.Size
-	WindowFrame.Active = true;
+    WindowFrame.Parent = NeverLose.ScreenGui;
+    WindowFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    WindowFrame.BackgroundColor3 = Color3.fromRGB(8, 8, 13)
+    WindowFrame.BackgroundTransparency = 0.055
+    WindowFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    WindowFrame.BorderSizePixel = 0
+    WindowFrame.ClipsDescendants = true
+    WindowFrame.Position = UDim2.new(255, 0, 255, 0)
+    WindowFrame.Size = Window.Size
+    WindowFrame.Active = true;
 
-	if not NeverLose.EnabledBlur then
-		WindowFrame.BackgroundTransparency = 0.0255
-	end;
+    if not NeverLose.EnabledBlur then
+        WindowFrame.BackgroundTransparency = 0.0255
+    end;
 
-	local renderParentWindow = LPH_NO_VIRTUALIZE(function()
-		if Window.__3DRender then
-			if WindowFrame.BackgroundTransparency > 0.9 then
-				WindowFrame.Visible = false;
-				WindowFrame.Parent = nil
-			else
-				WindowFrame.Visible = true;
+    task.spawn(function()
+        local tInfo = TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
 
-				NeverLose.PlayAnimate(WindowFrame,VSlowTween , {
-					Position = UDim2.fromScale(0.5,0.5);
-				});
-				
-				WindowFrame.Parent = Window.SurfaceGui;
-			end;
-		else
-			if WindowFrame.BackgroundTransparency > 0.9 then
-				WindowFrame.Visible = false;
-				WindowFrame.Parent = nil
-			else
-				WindowFrame.Visible = true;
-				WindowFrame.Parent = NeverLose.ScreenGui
+        local cDarkBlue = Color3.fromRGB(20, 45, 120)
+        local cLightBlue = Color3.fromRGB(120, 190, 255)
+        local cWhite = Color3.fromRGB(245, 250, 255)
 
+        WindowFrame.BackgroundColor3 = cDarkBlue
 
-			end;
-		end;
-	end);
+        while true do
+            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cLightBlue}):Play()
+            task.wait(5)
+            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cWhite}):Play()
+            task.wait(5)
+            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cLightBlue}):Play()
+            task.wait(5)
+            TweenService:Create(WindowFrame, tInfo, {BackgroundColor3 = cDarkBlue}):Play()
+            task.wait(5)
+        end
+    end)
+
+    local renderParentWindow = LPH_NO_VIRTUALIZE(function()
+        if Window.__3DRender then
+            if WindowFrame.BackgroundTransparency > 0.9 then
+                WindowFrame.Visible = false;
+                WindowFrame.Parent = nil
+            else
+                WindowFrame.Visible = true;
+
+                NeverLose.PlayAnimate(WindowFrame,VSlowTween , {
+                    Position = UDim2.fromScale(0.5,0.5);
+                });
+                
+                WindowFrame.Parent = Window.SurfaceGui;
+            end;
+        else
+            if WindowFrame.BackgroundTransparency > 0.9 then
+                WindowFrame.Visible = false;
+                WindowFrame.Parent = nil
+            else
+                WindowFrame.Visible = true;
+                WindowFrame.Parent = NeverLose.ScreenGui
+
+            end;
+        end;
+    end);
 
 	NeverLose:AddSignal(WindowFrame:GetPropertyChangedSignal('BackgroundTransparency'):Connect(renderParentWindow))
 
