@@ -3495,194 +3495,199 @@ function NeverLose:RegisiterItem(Frame: Frame , Signel)
 			end;
 		end);
 
-		function handle:SetVisible(val)
-			BasedFrame.Visible = val;
-		end;
+function handle:SetVisible(val)
+            BasedFrame.Visible = val;
+        end;
 
-		NeverLose:AddSignal(BasedFrame.MouseEnter:Connect(LPH_NO_VIRTUALIZE(function()
-			NeverLose.PlayAnimate(BasedFrame , SlowyTween , {
-				BackgroundTransparency = 0.35
-			});
+        NeverLose:AddSignal(BasedFrame.MouseEnter:Connect(LPH_NO_VIRTUALIZE(function()
+            NeverLose.PlayAnimate(BasedFrame , SlowyTween , {
+                BackgroundTransparency = 0.35
+            });
 
-			NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
-				TextTransparency = 0.25
-			})
+            NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
+                TextTransparency = 0.25
+            })
 
-		end)))
+        end)))
 
-		NeverLose:AddSignal(BasedFrame.MouseLeave:Connect(LPH_NO_VIRTUALIZE(function()
-			NeverLose.PlayAnimate(BasedFrame , SlowyTween , {
-				BackgroundTransparency = 1
-			});
+        NeverLose:AddSignal(BasedFrame.MouseLeave:Connect(LPH_NO_VIRTUALIZE(function()
+            NeverLose.PlayAnimate(BasedFrame , SlowyTween , {
+                BackgroundTransparency = 1
+            });
 
-			NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
-				TextTransparency = 0.35
-			})
-		end)))
+            NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
+                TextTransparency = 0.35
+            })
+        end)))
 
-		function handle:SetText(t)
-			local oldtxt = BasedLabel.Text;
+        function handle:SetText(t)
+            local oldtxt = BasedLabel.Text;
 
-			BasedLabel.Text = t;
+            BasedLabel.Text = t;
 
-			if Warp and oldtxt ~= t then
-				UpdateWarp();
-			end;
-		end;
+            if Warp and oldtxt ~= t then
+                UpdateWarp();
+            end;
+        end;
 
-		function handle:ToolTip(Content: string)
-			handle.ToolTip = NeverLose:CreateToolTips(BasedFrame , Name , Content);
+        function handle:ToolTip(Content: string)
+            handle.ToolTip = NeverLose:CreateToolTips(BasedFrame , Name , Content);
 
-			return handle;
-		end;
+            return handle;
+        end;
 
-		handle.SetRender(Signel:GetValue());
-		Signel:Connect(handle.SetRender);
+        handle.SetRender(Signel:GetValue());
+        Signel:Connect(handle.SetRender);
 
-		return handle;
-	end;
+        return handle;
+    end;
 
-	function idx:AddButton(Config)
-		Config = NeverLose:ProcessParams(Config , {
-			Icon = 'chevron-large-left',
-			Name = "Button",
-			Callback = EmptyFunction,
-			ToolTip = nil,
-		});
+    function idx:AddButton(Config)
+        Config = NeverLose:ProcessParams(Config , {
+            Icon = 'chevron-large-left',
+            Name = "Button",
+            Callback = EmptyFunction,
+            ToolTip = nil,
+        });
 
-		local Button = {};
-		local ButtonFrame = Instance.new("Frame")
-		local BasedLabel = Instance.new("TextLabel")
-		local LineFrame = Instance.new("Frame")
-		local UICorner = Instance.new("UICorner")
-		local Icon = Instance.new("TextLabel")
+        local Button = {};
+        local ButtonFrame = Instance.new("Frame")
+        local BasedLabel = Instance.new("TextLabel")
+        local LineFrame = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+        local Icon = Instance.new("TextLabel")
 
-		NeverLose:AddQuery(ButtonFrame , Config.Name);
+        NeverLose:AddQuery(ButtonFrame , Config.Name);
 
-		ButtonFrame.Name = NeverLose.RandomString();
-		ButtonFrame.Parent = Frame
-		ButtonFrame.BackgroundColor3 = Color3.fromRGB(25, 27, 33)
-		ButtonFrame.BackgroundTransparency = 1.000
-		ButtonFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ButtonFrame.BorderSizePixel = 0
-		ButtonFrame.Size = UDim2.new(1, 0, 0, 30)
-		ButtonFrame.ZIndex = LayerIndex + 8
+        ButtonFrame.Name = NeverLose.RandomString();
+        ButtonFrame.Parent = Frame
+        ButtonFrame.BackgroundColor3 = Color3.fromRGB(25, 27, 33)
+        ButtonFrame.BackgroundTransparency = 1.000
+        ButtonFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        ButtonFrame.BorderSizePixel = 0
+        ButtonFrame.Size = UDim2.new(1, 0, 0, 30)
+        ButtonFrame.ZIndex = LayerIndex + 8
 
-		BasedLabel.Name = NeverLose.RandomString();
-		BasedLabel.Parent = ButtonFrame
-		BasedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		BasedLabel.BackgroundTransparency = 1.000
-		BasedLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		BasedLabel.BorderSizePixel = 0
-		BasedLabel.Position = UDim2.new(0, 35, 0, 6)
-		BasedLabel.Size = UDim2.new(0,1, 0, 15)
-		BasedLabel.ZIndex = LayerIndex + 9
-		BasedLabel.Font = Enum.Font.GothamMedium
-		BasedLabel.Text = Config.Name;
-		BasedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		BasedLabel.TextSize = 13.000
-		BasedLabel.TextTransparency = 0.200
-		BasedLabel.TextXAlignment = Enum.TextXAlignment.Left
+        BasedLabel.Name = NeverLose.RandomString();
+        BasedLabel.Parent = ButtonFrame
+        BasedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        BasedLabel.BackgroundTransparency = 1.000
+        ButtonFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        BasedLabel.BorderSizePixel = 0
+        BasedLabel.Position = UDim2.new(0, 35, 0, 6)
+        BasedLabel.Size = UDim2.new(0,1, 0, 15)
+        BasedLabel.ZIndex = LayerIndex + 9
+        BasedLabel.Font = Enum.Font.GothamMedium
+        BasedLabel.Text = Config.Name;
+        BasedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        BasedLabel.TextSize = 13.000
+        BasedLabel.TextTransparency = 0.200
+        BasedLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-		LineFrame.Name = NeverLose.RandomString();
-		LineFrame.Parent = ButtonFrame
-		LineFrame.AnchorPoint = Vector2.new(0.5, 1)
-		LineFrame.BackgroundColor3 = Color3.fromRGB(45, 48, 58)
-		LineFrame.BackgroundTransparency = 0.650
-		LineFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		LineFrame.BorderSizePixel = 0
-		LineFrame.Position = UDim2.new(0.5, 0, 1, 0)
-		LineFrame.Size = UDim2.new(1, -20, 0, 1)
-		LineFrame.ZIndex = LayerIndex + 11
+        LineFrame.Name = NeverLose.RandomString();
+        LineFrame.Parent = ButtonFrame
+        LineFrame.AnchorPoint = Vector2.new(0.5, 1)
+        LineFrame.BackgroundColor3 = Color3.fromRGB(45, 48, 58)
+        LineFrame.BackgroundTransparency = 0.650
+        LineFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        LineFrame.BorderSizePixel = 0
+        LineFrame.Position = UDim2.new(0.5, 0, 1, 0)
+        LineFrame.Size = UDim2.new(1, -20, 0, 1)
+        LineFrame.ZIndex = LayerIndex + 11
 
-		UICorner.CornerRadius = UDim.new(0, 10)
-		UICorner.Parent = ButtonFrame
+        UICorner.CornerRadius = UDim.new(0, 10)
+        UICorner.Parent = ButtonFrame
 
-		Icon.Name = NeverLose.RandomString();
-		Icon.Parent = ButtonFrame
-		Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Icon.BackgroundTransparency = 1.000
-		Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Icon.BorderSizePixel = 0
-		Icon.Position = UDim2.new(0, 11, 0, 5)
-		Icon.Size = UDim2.new(0, 18, 0, 18)
-		Icon.ZIndex = LayerIndex + 9
-		Icon.FontFace = NeverLose.BuiltInBold
-		Icon.Text = Config.Icon
-		Icon.TextColor3 = Color3.fromRGB(223, 223, 223)
-		Icon.TextSize = 16.000
-		Icon.TextTransparency = 0.250
-		Icon.TextWrapped = true
+        Icon.Name = NeverLose.RandomString();
+        Icon.Parent = ButtonFrame
+        Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Icon.BackgroundTransparency = 1.000
+        Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        Icon.BorderSizePixel = 0
+        Icon.Position = UDim2.new(0, 11, 0, 5)
+        Icon.Size = UDim2.new(0, 18, 0, 18)
+        Icon.ZIndex = LayerIndex + 9
+        Icon.FontFace = NeverLose.BuiltInBold
+        Icon.Text = Config.Icon
+        Icon.TextColor3 = Color3.fromRGB(223, 223, 223)
+        Icon.TextSize = 16.000
+        Icon.TextTransparency = 0.250
+        Icon.TextWrapped = true
 
-		function Button:SetText(t)
-			BasedLabel.Text = t;
-		end;
+        function Button:SetText(t)
+            BasedLabel.Text = t;
+        end;
 
-		function Button:SetIcon(t)
-			Icon.Text = t
-		end;
+        function Button:SetIcon(t)
+            Icon.Text = t
+        end;
 
-		local bth = NeverLose:CreateInput(ButtonFrame , LPH_NO_VIRTUALIZE(function()
-			Config.Callback();
-		end));
+        local bth = NeverLose:CreateInput(ButtonFrame , LPH_NO_VIRTUALIZE(function()
+            task.spawn(function()
+                NeverLose.PlayAnimate(ButtonFrame, FastTween, {BackgroundTransparency = 0})
+                task.wait(0.1)
+                NeverLose.PlayAnimate(ButtonFrame, SlowyTween, {BackgroundTransparency = 0.35})
+            end)
+            Config.Callback();
+        end));
 
-		NeverLose:AddSignal(bth.MouseEnter:Connect(LPH_NO_VIRTUALIZE(function()
-			NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
-				BackgroundTransparency = 0.35
-			});
-		end)))
+        NeverLose:AddSignal(bth.MouseEnter:Connect(LPH_NO_VIRTUALIZE(function()
+            NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
+                BackgroundTransparency = 0.35
+            });
+        end)))
 
-		NeverLose:AddSignal(bth.MouseLeave:Connect(LPH_NO_VIRTUALIZE(function()
-			NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
-				BackgroundTransparency = 1
-			});
-		end)))
+        NeverLose:AddSignal(bth.MouseLeave:Connect(LPH_NO_VIRTUALIZE(function()
+            NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
+                BackgroundTransparency = 1
+            });
+        end)))
 
-		Button.SetRender = LPH_NO_VIRTUALIZE(function(value)
-			if value then
-				NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
-					BackgroundTransparency = 1
-				});
+        Button.SetRender = LPH_NO_VIRTUALIZE(function(value)
+            if value then
+                NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
+                    BackgroundTransparency = 1
+                });
 
-				NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
-					TextTransparency = 0.200
-				});
+                NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
+                    TextTransparency = 0.200
+                });
 
-				NeverLose.PlayAnimate(LineFrame , SlowyTween , {
-					BackgroundTransparency = 0.650
-				});
+                NeverLose.PlayAnimate(LineFrame , SlowyTween , {
+                    BackgroundTransparency = 0.650
+                });
 
-				NeverLose.PlayAnimate(Icon , SlowyTween , {
-					TextTransparency = 0.250
-				});
-			else
-				NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
-					BackgroundTransparency = 1
-				});
+                NeverLose.PlayAnimate(Icon , SlowyTween , {
+                    TextTransparency = 0.250
+                });
+            else
+                NeverLose.PlayAnimate(ButtonFrame , SlowyTween , {
+                    BackgroundTransparency = 1
+                });
 
-				NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
-					TextTransparency = 1
-				});
+                NeverLose.PlayAnimate(BasedLabel , SlowyTween , {
+                    TextTransparency = 1
+                });
 
-				NeverLose.PlayAnimate(LineFrame , SlowyTween , {
-					BackgroundTransparency = 1
-				});
+                NeverLose.PlayAnimate(LineFrame , SlowyTween , {
+                    BackgroundTransparency = 1
+                });
 
-				NeverLose.PlayAnimate(Icon , SlowyTween , {
-					TextTransparency = 1
-				});
-			end;
-		end);
+                NeverLose.PlayAnimate(Icon , SlowyTween , {
+                    TextTransparency = 1
+                });
+            end;
+        end);
 
-		if Config.ToolTip then
-			Button.ToolTip = NeverLose:CreateToolTips(ButtonFrame , Config.Name , Config.ToolTip);
-		end;
+        if Config.ToolTip then
+            Button.ToolTip = NeverLose:CreateToolTips(ButtonFrame , Config.Name , Config.ToolTip);
+        end;
 
-		Button.SetRender(Signel:GetValue())
-		Signel:Connect(Button.SetRender);
+        Button.SetRender(Signel:GetValue())
+        Signel:Connect(Button.SetRender);
 
-		return Button;
-	end;
+        return Button;
+    end;
 
 	function idx:AddUserFrame(Name : string , Profile: string , Expires : string)
 		local UserFrame = Instance.new("Frame")
@@ -3890,7 +3895,7 @@ function NeverLose:CreateWindow(Config)
 	WindowFrame.Name = NeverLose.RandomString();
     WindowFrame.Parent = NeverLose.ScreenGui;
     WindowFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    WindowFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Белый цвет обязателен для работы градиента
+    WindowFrame.BackgroundColor3 = Color3.fromRGB(15, 60, 180) -- Чисто синий цвет (можешь менять цифры под себя)
     WindowFrame.BackgroundTransparency = 0.055
     WindowFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
     WindowFrame.BorderSizePixel = 0
@@ -3902,28 +3907,6 @@ function NeverLose:CreateWindow(Config)
     if not NeverLose.EnabledBlur then
         WindowFrame.BackgroundTransparency = 0.0255
     end;
-
-    -- Создаем градиент для эффекта воды
-    local waterGradient = Instance.new("UIGradient")
-    waterGradient.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(15, 60, 130)),   -- Глубокий синий
-        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(50, 140, 190)),  -- Мягкий океанский голубой
-        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 80, 150))    -- Морской синий
-    })
-    waterGradient.Parent = WindowFrame
-
-    -- Анимация перетекания
-    task.spawn(function()
-        local tInfo = TweenInfo.new(8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
-        
-        while true do
-            -- Градиент плавно смещается и вращается, создавая эффект течения
-            TweenService:Create(waterGradient, tInfo, {Offset = Vector2.new(0.3, 0.3), Rotation = 30}):Play()
-            task.wait(8)
-            TweenService:Create(waterGradient, tInfo, {Offset = Vector2.new(-0.3, -0.3), Rotation = -30}):Play()
-            task.wait(8)
-        end
-    end)
 
     local renderParentWindow = LPH_NO_VIRTUALIZE(function()
         if Window.__3DRender then
